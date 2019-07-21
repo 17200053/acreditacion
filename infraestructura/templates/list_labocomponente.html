@@ -1,0 +1,36 @@
+{% extends "blank.html" %}
+{% load staticfiles %}
+
+{% block main %}
+
+
+    <br>
+        <a class="btn btn-primary" href="{% url 'create_componenteLaboratorio' %}">Nuevo ComponenteLaboratorio</a>
+    <br>
+
+    <p align="center" class="text-success fa-2x">Lista de Componentes de laboratorio</p>
+
+    <div>
+        <table class="table table-bordered">
+            <thead>
+                <th>NUMEROLABO</th>
+                <th>NUMEROCOMPONENTE</th>
+                <th>NUMEROSERIE</th>
+            <th></th>
+            <th></th>
+            </thead>
+
+            <tbody>
+                {% for cmplabo in  compLabo %}
+                    <tr>
+                        <td>{{ cmplabo.labo_id }}</td>
+                        <td>{{ cmplabo.comp_id }}</td>
+                        <td>{{ cmplabo.labo_cmp_numSERIE}}</td>
+                        <td><a class="btn btn-info"  href="{% url 'edit_componenteLaboratorio' cmplabo.id %}"> Editar </a> </td>
+                        <td><a class="btn btn-danger" href="{% url 'delete_componenteLaboratorio' cmplabo.id %}"> Eliminar </a> </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

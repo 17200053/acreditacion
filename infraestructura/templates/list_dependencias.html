@@ -1,0 +1,33 @@
+{% extends "blank.html" %}
+{% load staticfiles %}
+
+{% block main %}
+
+    <br>
+        <a class="btn btn-primary" href="{% url 'create_dependencia' %}">Nueva Dependencia</a>
+    <br>
+
+    <p align="center" class="text-success fa-2x">Lista de Dependencias</p>
+
+    <div>
+        <table class="table table-bordered">
+            <thead>
+                <th>CODIGO</th>
+                <th>NOMBRE</th>
+                <th>MODIFICAR</th>
+                <th>ELIMINAR</th>
+            </thead>
+
+            <tbody>
+                {% for dep in  dependencia %}
+                    <tr>
+                        <td>{{ dep.dpn_codigo}}</td>
+                        <td>{{ dep.dpn_nombre }}</td>
+                        <td><a class="btn btn-info"  href="{% url 'edit_dependencia' dep.dpn_codigo %}"> Editar </a> </td>
+                        <td><a class="btn btn-danger" href="{% url 'delete_dependencia' dep.dpn_codigo %}" > Eliminar </a> </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

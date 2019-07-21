@@ -1,0 +1,53 @@
+{% extends "blank.html" %}
+{% load staticfiles %}
+
+{% block main %}
+
+    <form method="post" class="form-horizontal">
+        {% csrf_token %}
+
+        {% for hidden in form.hidden_fields %}
+            {{ hidden }}
+        {% endfor %}
+
+         <legend class="text-center header" style="color: #2e59d9"><strong> PROGRAMA DE LABORATORIO</strong></legend>
+
+        <br>
+
+        <div class="form-group">
+            <div class="text-center header ">
+                <label  class="control-label "><strong>LABORATORIO:</strong></label>
+            </div>
+            <div class=" text-center header">
+                 {{ form.labo_id }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="text-center header ">
+                <label  class="control-label "><strong>PROGRAMA:</strong></label>
+            </div>
+            <div class=" text-center header">
+                 {{ form.prg_id }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="text-center header ">
+                <label  class="control-label "><strong>NUMERO DE MAQUINA</strong></label>
+            </div>
+            <div class=" text-center header">
+                 {{ form.labo_prg_numPC }}
+            </div>
+
+        </div>
+<br>
+        <div class="form-group">
+          <div class=" text-center header">
+                   <input class = "btn btn-primary pull-right" type="submit" name="submit" value="ACTUALIZAR PROGRAMA DE LABORATORIO">
+            </div>
+        </div>
+
+    </form>
+
+{% endblock %}

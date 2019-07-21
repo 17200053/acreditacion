@@ -1,0 +1,37 @@
+{% extends "blank.html" %}
+{% load staticfiles %}
+
+{% block main %}
+
+    <br>
+        <a class="btn btn-primary" href="{% url 'create_referencia' %}">Nueva Referencia</a>
+    <br>
+
+    <p align="center" class="text-success fa-2x">Lista de Referencias</p>
+
+    <div>
+        <table class="table table-bordered">
+            <thead>
+                <th>NUMERO</th>
+                <th>UBICACION</th>
+                <th>PISO</th>
+                <th>PABELLON</th>
+                <th>MODIFICAR</th>
+                <th>ELIMINAR</th>
+            </thead>
+
+            <tbody>
+                {% for ref in  referencia %}
+                    <tr>
+                        <td>{{ ref.ref_id }}</td>
+                        <td>{{ ref.ref_ubicacion}}</td>
+                        <td>{{ ref.ref_piso }}</td>
+                        <td>{{ ref.ref_pabellon }}</td>
+                        <td><a class="btn btn-info"  href="{% url 'edit_referencia' ref.ref_id %}"> Editar </a> </td>
+                        <td><a class="btn btn-danger" href="{% url 'delete_referencia' ref.ref_id %}" > Eliminar </a> </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

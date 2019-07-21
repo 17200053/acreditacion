@@ -1,0 +1,56 @@
+{% extends "blank.html" %}
+{% load staticfiles %}
+
+{% block main %}
+
+    <form method="post" class="form-horizontal">
+        {% csrf_token %}
+
+        {% for hidden in form.hidden_fields %}
+            {{ hidden }}
+        {% endfor %}
+
+       <legend class="text-center header" style="color: #2e59d9"><strong>NUEVO LABORATORIO</strong></legend>
+
+        <br>
+
+        <div class="form-group">
+            <div class="text-center header ">
+                <label  class="control-label "><strong>NOMBRE REFERENCIA:</strong></label>
+            </div>
+            <div class=" text-center header">
+                 {{ form.ref_id }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="text-center header ">
+                <label  class="control-label "><strong>CODIGO DE ENCARGADO:</strong></label>
+            </div>
+            <div class=" text-center header">
+                 {{ form.enc_codigo }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="text-center header ">
+                <label  class="control-label "><strong>CAPACIDAD DE MAQUINAS:</strong></label>
+            </div>
+            <div class=" text-center header">
+                 {{ form.labo_capacidadmaquinas }}
+            </div>
+
+        </div>
+
+<br>
+        <div class="form-group">
+          <div class=" text-center header">
+                   <input class = "btn btn-primary pull-right" type="submit" name="submit" value="AGREGAR LABORATORIO">
+            </div>
+        </div>
+
+
+
+    </form>
+
+{% endblock %}

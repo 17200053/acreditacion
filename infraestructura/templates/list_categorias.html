@@ -1,0 +1,35 @@
+{% extends "blank.html" %}
+{% load staticfiles %}
+
+{% block main %}
+
+    <br>
+        <a class="btn btn-primary" href="{% url 'create_categoria' %}">Nueva Categoria</a>
+    <br>
+
+    <p align="center" class="text-success fa-2x">Lista de Categorias</p>
+
+    <div>
+        <table class="table table-bordered">
+            <thead>
+                <th>NUMERO</th>
+                <th>NOMBRE</th>
+                <th>DESCRIPCION</th>
+                <th>MODIFICAR</th>
+                <th>ELIMINAR</th>
+            </thead>
+
+            <tbody>
+                {% for cat in  categoria %}
+                    <tr>
+                        <td>{{ cat.cat_id }}</td>
+                        <td>{{ cat.cat_nombre}}</td>
+                        <td>{{ cat.cat_descripcion }}</td>
+                        <td><a class="btn btn-info"  href="{% url 'edit_categoria' cat.cat_id %}"> Editar </a> </td>
+                        <td><a class="btn btn-danger" href="{% url 'delete_categoria' cat.cat_id %}" > Eliminar </a> </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

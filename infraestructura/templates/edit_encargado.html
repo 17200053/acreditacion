@@ -1,0 +1,81 @@
+{% extends "blank.html" %}
+{% load staticfiles %}
+
+{% block main %}
+
+    <form method="post" class="form-horizontal">
+        {% csrf_token %}
+
+        {% for hidden in form.hidden_fields %}
+            {{ hidden }}
+        {% endfor %}
+
+        <legend class="text-center header" style="color: #2e59d9"><strong> ENCARGADO</strong></legend>
+
+        <br>
+
+        <div class="form-group">
+            <div class="text-center header ">
+                <label  class="control-label "><strong>CODIGO :</strong></label>
+            </div>
+            <div class=" text-center header">
+                 {{ form.enc_codigo }}
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <div class="text-center header ">
+                <label  class="control-label "><strong>NUMERO DE DNI:</strong></label>
+            </div>
+            <div class=" text-center header">
+                 {{ form.enc_dni }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="text-center header ">
+                <label  class="control-label "><strong>NOMBRES:</strong></label>
+            </div>
+            <div class=" text-center header">
+                 {{ form.enc_nombres }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="text-center header ">
+                <label  class="control-label "><strong>APELLIDO PATERNO :</strong></label>
+            </div>
+            <div class=" text-center header">
+                 {{ form.enc_ape_paterno }}
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <div class="text-center header ">
+                <label  class="control-label "><strong>APELLIDO MATERNO :</strong></label>
+            </div>
+            <div class=" text-center header">
+                 {{ form.enc_ape_materno }}
+            </div>
+        </div>
+
+        <div class="form-group">
+           <div class="text-center header ">
+                <label  class="control-label "><strong>CODIGO DE DEPENDENCIA :</strong></label>
+            </div>
+            <div class=" text-center header">
+                 {{ form.dpn_codigo }}
+            </div>
+        </div>
+<br>
+        <div class="form-group">
+          <div class=" text-center header">
+                   <input class = "btn btn-primary pull-right" type="submit" name="submit" value="ACTUALIZAR ENCARGADO">
+            </div>
+        </div>
+
+    </form>
+
+{% endblock %}

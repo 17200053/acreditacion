@@ -1,0 +1,62 @@
+{% extends "blank.html" %}
+{% load staticfiles %}
+
+{% block main %}
+
+    <form method="post" class="form-horizontal">
+        {% csrf_token %}
+
+        {% for hidden in form.hidden_fields %}
+            {{ hidden }}
+        {% endfor %}
+
+        <legend class="text-center header" style="color: #2e59d9"><strong> PROGRAMA</strong></legend>
+
+        <br>
+
+        <div class="form-group">
+            <div class="text-center header ">
+                <label  class="control-label "><strong>NOMBRE DE PROGRAMA:</strong></label>
+            </div>
+            <div class=" text-center header">
+                 {{ form.prg_nombre }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="text-center header ">
+                <label  class="control-label "><strong>VERSION DE PROGRAMA:</strong></label>
+            </div>
+            <div class=" text-center header">
+                 {{ form.prg_version}}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="text-center header ">
+                <label  class="control-label "><strong>FABRICANTE DE PROGRAMA:</strong></label>
+            </div>
+            <div class=" text-center header">
+                 {{ form.prg_fabrica_desarr }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="text-center header ">
+                <label  class="control-label "><strong>TIPO DE PROGRAMA:</strong></label>
+            </div>
+            <div class=" text-center header">
+                 {{ form.prg_tipo }}
+            </div>
+        </div>
+
+<br>
+        <div class="form-group">
+          <div class=" text-center header">
+                   <input class = "btn btn-primary pull-right" type="submit" name="submit" value="ACTUALIZAR PROGRAMA">
+            </div>
+        </div>
+
+    </form>
+
+{% endblock %}

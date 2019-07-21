@@ -1,0 +1,132 @@
+{% extends "blank.html" %}
+{% load staticfiles %}
+
+{% block main %}
+
+    <div class="card shadow mb-4">
+      <div class="card-header py-3">
+              <h4 class="m-0 font-weight-bold " style="color: black">DETALLE LABORATORIO {{ laboratorio.labo_id }} </h4>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                   <form method="POST" id="forme" >{% csrf_token %}
+                  <table class="table table-bordered " id="dataTable" width="100%" cellspacing="0">
+            <thead>
+            <tr bgcolor="#fff8dc">
+                <th class="text-center">LABORATORIO</th>
+                <th class="text-center">REFERENCIA</th>
+                <th class="text-center">CODIGO  ENCARGADO</th>
+                <th class="text-center">CAPACIDAD MAQUINAS</th>
+               <th></th>
+                <th></th>
+            </tr>
+            </thead>
+
+                    <tr  bgcolor="#f5f5dc">
+                        <td class="text-center" >{{ laboratorio.labo_id }}</td>
+                        <td class="text-center">{{ laboratorio.ref_id}}</td>
+                        <td class="text-center">{{ laboratorio.enc_codigo }}</td>
+                        <td class="text-center">{{ laboratorio.labo_capacidadmaquinas }}</td>
+                        <td class="text-center"><a class="btn btn-link"  href="{% url 'edit_laboratorio' laboratorio.labo_id %}"> <i class="fas fa-pen fa-xs"></i> </a> </td>
+                      <td class="text-center"><a  class="btn btn-link" href="{% url 'delete_laboratorio' laboratorio.labo_id %}" > <i class="fas text-danger fa-trash fa-xs"></i></a></td>
+                    </tr>
+                      <tbody id="des{{ labo.labo_id }}" >
+                            <tr bgcolor="black" >
+                                <th colspan="6"></th>
+                            </tr>
+                            <tr bgcolor="#fff8dc" ><td class="text-center"colspan="4"><strong>ENCARGADO</strong></td></tr>
+                            <tr  bgcolor="#f0f8ff" >
+                             <td class="text-center">CODIGO</td>
+                              <td class="text-center">DNI</td>
+                              <td class="text-center" colspan="2">NOMBRES</td>
+                            </tr>
+                            {% for encar in  encargado %}
+                          {% if encar.enc_codigo == laboratorio.enc_codigo.enc_codigo %}
+                          <tr>
+                            <td class="text-center">{{ encar.enc_codigo }}</td>
+                            <td class="text-center">{{ encar.enc_dni }}</td>
+                            <td colspan="2" class="text-center" >{{encar.enc_nombres }}  {{encar.enc_ape_paterno}}  {{encar.enc_ape_materno}} </td>
+                            <td class="text-center"><a class="btn btn-link"  href="{% url 'edit_encargado' encar.enc_codigo %}"> <i class="fas fa-pen fa-xs"></i> </a> </td>
+                            <td class="text-center"><a  class="btn btn-link" href="{% url 'delete_encargado' encar.enc_codigo %}" > <i class="fas text-danger fa-trash fa-xs"></i></a></td>
+                          </tr>
+                          {% endif %}
+                            {% endfor %}
+                            <tr bgcolor="black" >
+                                <th colspan="6"></th>
+                            </tr>
+                            <tr bgcolor="#fff8dc">  <td class="text-center" colspan="4"><strong>REFERENCIA</strong></td></tr>
+                            <tr bgcolor="#f0f8ff">
+                             <td class="text-center">NUMERO</td>
+                              <td class="text-center">UBICACION</td>
+                              <td class="text-center" colspan="2">DESCRIPCION</td>
+                            </tr>
+                          {% for ref in  referencia %}
+                          {% if ref.ref_id == laboratorio.ref_id.ref_id %}
+                          <tr>
+                            <td class="text-center">{{ ref.ref_id }}</td>
+                            <td class="text-center">{{ ref.ref_ubicacion}}</td>
+                            <td colspan="2" class="text-center">PISO: {{ref.ref_piso }} - PABELLON:  {{ref.ref_pabellon}}   </td>
+                            <td class="text-center"><a class="btn btn-link"  href="{% url 'edit_referencia' ref.ref_id  %}"> <i class="fas fa-pen fa-xs"></i> </a> </td>
+                            <td class="text-center"><a  class="btn btn-link" href="{% url 'delete_referencia' ref.ref_id  %}" > <i class="fas text-danger fa-trash fa-xs"></i></a></td>
+                          </tr>
+                          {% endif %}
+                          {% endfor %}
+                            <tr bgcolor="black" >
+                                <th colspan="6"></th>
+                            </tr>
+                            <tr bgcolor="#fff8dc"><td class="text-center" colspan="4"><strong>COMPONENTES</strong></td></tr>
+                            <tr bgcolor="#f0f8ff"><td class="text-center">SERIE</td>
+                             <td class="text-center">DETALLES</td>
+                              <td class="text-center" colspan="2">DESCRIPCION</td>
+                            </tr>
+
+                    {% for cmpl in  labocomp %}
+                          {% if cmpl.labo_id.labo_id == laboratorio.labo_id %}
+                          <tr>
+                            <td class="text-center">{{ cmpl.labo_cmp_numSERIE}}</td>
+                            {% for cmp in  componente %}
+                            {% if cmpl.comp_id.comp_id == cmp.comp_id %}
+                            <td class="text-center" >MARCA: {{ cmp.comp_marca}} <br> MODELO: {{ cmp.comp_modelo}}</td>
+                            <td colspan="2" class="text-center">{{ cmp.comp_descripcion }} </td>
+                            {% endif %}
+                            {% endfor %}
+                            <td class="text-center"><a class="btn btn-link" href="{% url 'edit_componenteLaboratorio' cmpl.id%}"> <i class="fas fa-pen fa-xs"></i> </a> </td>
+                            <td class="text-center"><a  class="btn btn-link"  href="{% url 'delete_componenteLaboratorio' cmpl.id%}"> <i class="fas text-danger fa-trash fa-xs"></i></a></td>
+                          </tr>
+                          {% endif %}
+                          {% endfor %}
+                    <tr bgcolor="black" >
+                                <th colspan="6"></th>
+                            </tr>
+                            <tr bgcolor="#fff8dc"><td class="text-center" colspan="4"><strong>PROGRAMAS</strong></td></tr>
+                            <tr bgcolor="#f0f8ff"><td class="text-center">MAQUINA</td>
+                             <td class="text-center">NOMBRE</td>
+                              <td class="text-center" colspan="2">DETALLE</td>
+                            </tr>
+                        {% for prgl in  laboprg %}
+                          {% if prgl.labo_id.labo_id == laboratorio.labo_id %}
+                          <tr>
+                            <td class="text-center">{{ prgl.labo_prg_numPC}}</td>
+                            {% for prg in  programa %}
+                            {% if prgl.prg_id.prg_id == prg.prg_id %}
+                            <td class="text-center"> {{ prg.prg_nombre}} </td>
+                            <td colspan="2" class="text-center">VERSION: {{ prg.prg_version }} <br> DESARROLLADOR: {{ prg.prg_fabrica_desarr }}  </td>
+                            {% endif %}
+                            {% endfor %}
+                            <td class="text-center"><a class="btn btn-link" href="{% url 'edit_programaLaboratorio' prgl.id%}"> <i class="fas fa-pen fa-xs"></i> </a> </td>
+                            <td class="text-center"><a  class="btn btn-link" href="{% url 'delete_programaLaboratorio' prgl.id%}" > <i class="fas text-danger fa-trash fa-xs"></i></a></td>
+                          </tr>
+                          {% endif %}
+                          {% endfor %}
+
+                    <tr bgcolor="black" >
+                                <td colspan="6"></td>
+                            </tr>
+                    </tbody>
+
+            </table>
+                   </form>
+            </div>
+            </div>
+              </div>
+{% endblock %}
